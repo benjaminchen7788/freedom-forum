@@ -32,6 +32,7 @@ export default function Home() {
         placeholder="寫下你的想法..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
+        style={{ width: "100%", height: "100px", marginBottom: "1rem" }}
       />
 
       <button
@@ -42,7 +43,7 @@ export default function Home() {
       </button>
 
       <div className="mt-6">
-        <h2 className="text-lg font-semibold mb-2">留言牆</h2>
+        <h2 className="text-lg font-semibold mb-2">發表評論</h2>
         {comments.length === 0 && <p className="text-gray-500">還沒有留言，快來當第一個吧！</p>}
         <ul className="space-y-2">
           {comments.map((c, i) => (
