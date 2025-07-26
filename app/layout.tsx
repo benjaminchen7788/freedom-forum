@@ -1,6 +1,6 @@
 // app/layout.tsx
 export const metadata = {
-  title: '自由論壇',
+  title: '共話天涯',
   description: '一個人人可發聲的自由平台',
 }
 
