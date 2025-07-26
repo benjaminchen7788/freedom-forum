@@ -6,15 +6,20 @@ export default function Home() {
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState<string[]>([])
 
-  // 初始化：從 localStorage 載入留言
+  // 載入 localStorage
   useEffect(() => {
     const stored = localStorage.getItem('comments')
+    console.log('讀到留言：', stored)
     if (stored) {
-      setComments(JSON.parse(stored))
+      try {
+        setComments(JSON.parse(stored))
+      } catch (e) {
+        console.error('解析失敗', e)
+      }
     }
   }, [])
 
-  // 新增留言 + 存到 localStorage
+  // 新增留言 + 存 localStorage
   const handlePost = () => {
     if (!comment.trim()) return
     const updated = [comment, ...comments]
@@ -25,14 +30,13 @@ export default function Home() {
 
   return (
     <main className="p-4 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">自由論壇 ✍️</h1>
+      <h1 className="text-2xl font-bold mb-4">自由發言區 ✍️</h1>
 
       <textarea
         className="w-full p-2 border rounded"
         placeholder="寫下你的想法..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        style={{ width: "100%", height: "100px", marginBottom: "1rem" }}
       />
 
       <button
@@ -43,7 +47,7 @@ export default function Home() {
       </button>
 
       <div className="mt-6">
-        <h2 className="text-lg font-semibold mb-2">發表評論</h2>
+        <h2 className="text-lg font-semibold mb-2">發佈留言</h2>
         {comments.length === 0 && <p className="text-gray-500">還沒有留言，快來當第一個吧！</p>}
         <ul className="space-y-2">
           {comments.map((c, i) => (
